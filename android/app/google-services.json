@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "785667684708",
+    "project_id": "repairmaster-381e4",
+    "storage_bucket": "repairmaster-381e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785667684708:android:e150c4eb06380809bb6271",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785667684708-0pdml944e37ngpcfnu40ms5t9jcnesbp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapp",
+            "certificate_hash": "5ac652edd08105f274c0108f3b11bd6ad1f6165a"
+          }
+        },
+        {
+          "client_id": "785667684708-ou60to6og03729f66ovpc2v2l4dfsell.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC834Q6T5PDhyF334cKWV5TMl6rrnalcyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785667684708-ou60to6og03729f66ovpc2v2l4dfsell.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
