@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:myapp/login/login_main_screen.dart';
 import 'package:myapp/login/tec_register.dart';
 
+import 'login_tec.dart';
+
 class selectuser extends StatelessWidget {
   const selectuser({Key? key}) : super(key: key);
 
@@ -28,7 +30,7 @@ class selectuser extends StatelessWidget {
                   'assets/Images/02.png'), // Replace with your image asset
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegistrationPage()));// Handle button 2 press
+                    MaterialPageRoute(builder: (context) => tecLoginscreen()));// Handle button 2 press
               },
             ),
           ],

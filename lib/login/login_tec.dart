@@ -6,38 +6,38 @@ import 'package:myapp/Screens/home_main.dart';
 import 'package:myapp/login/reuse.dart';
 // import 'package:green_connect/components/flutter_toast.dart';
 // import 'package:green_connect/login/login_community_signup.dart';
-
 import '../Screens/Home_user_main.dart';
 import 'package:myapp/login/tec_register.dart';
+import '../side_menu_content/flutter_toast.dart';
 
-class Loginscreen extends StatefulWidget {
-  const Loginscreen({super.key});
+class tecLoginscreen extends StatefulWidget {
+  const tecLoginscreen({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<Loginscreen> {
+class _LoginScreenState extends State<tecLoginscreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool isRememberMe = false;
 
-  // Future login() async {
-  //   try {
-  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //       email: _email.text,
-  //       password: _password.text,
-  //     );
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.code == 'user-not-found') {
-  //       AppToastmsg.appToastMeassage('No user found for that email.');
-  //     } else if (e.code == 'wrong-password') {
-  //       AppToastmsg.appToastMeassage('Wrong password provided for that user.');
-  //     }
-  //   }
-  // }
+  Future login() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _email.text,
+        password: _password.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        AppToastmsg.appToastMeassage('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        AppToastmsg.appToastMeassage('Wrong password provided for that user.');
+      }
+    }
+  }
 
   Widget buildUsername() {
     return Column(
@@ -223,7 +223,7 @@ class _LoginScreenState extends State<Loginscreen> {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomeUserMain()));
+            MaterialPageRoute(builder: (context) => RegistrationPage()));
       },
       child: RichText(
         text: const TextSpan(

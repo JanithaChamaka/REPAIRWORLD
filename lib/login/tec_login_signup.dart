@@ -42,7 +42,7 @@ class _CommLoginScreenState extends State<CommLoginscreen> {
   Future<void> _uploadUsernameToFirestore(User user, String email) async {
     try {
       await FirebaseFirestore.instance
-          .collection('users')
+          .collection('technicians')
           .doc(user.uid)
           .set({'email': email});
     } catch (e) {
