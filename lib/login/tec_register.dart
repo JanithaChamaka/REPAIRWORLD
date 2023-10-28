@@ -5,6 +5,7 @@ import 'package:myapp/Screens/home_main.dart';
 import 'package:myapp/login/login_main_screen.dart';
 
 import '../Screens/Home_user_main.dart';
+import 'login_tec.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -67,7 +68,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   //     UserCredential userCredential = await FirebaseAuth.instance
   //         .createUserWithEmailAndPassword(
   //             email: _emailController.text, password: _passwordController.text);
-
+  //
   //     // Store user data in Firebase Firestore
   //     await FirebaseFirestore.instance
   //         .collection('technicians')
@@ -79,7 +80,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   //       'district': _selectedDistrict,
   //       'expertise': _selectedExpertise,
   //     });
-
+  //
   //     // Navigate to another page to display technicians
   //     // Navigator.push(
   //     //   context,
@@ -98,6 +99,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       // Handle any authentication exceptions (e.g., email already in use)
+      print(e);
       return null;
     }
   }
@@ -122,7 +124,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         'expertise': expertise,
       });
     } catch (e) {
-      // Handle any Firestore upload exceptions
+        print(e);
     }
   }
 
@@ -256,7 +258,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     _registerUserWithEmailAndPassword();
                   }
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Loginscreen2()));
+                      MaterialPageRoute(builder: (context) => tecLoginscreen()));
                 },
                 child: Text('Register'),
               ),

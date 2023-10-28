@@ -1,5 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../side_menu_content/flutter_toast.dart';
+
+class Module {
+  final String remindID;
+  final String title;
+  final String note;
+  final String date;
+  final String time;
+  final String remind;
+  Module({
+    required this.remindID,
+    required this.title,
+    required this.note,
+    required this.date,
+    required this.time,
+    required this.remind,
+  });
+}
 
 class usersearchPage extends StatefulWidget {
   const usersearchPage({Key? key}) : super(key: key);
@@ -11,8 +31,20 @@ class usersearchPage extends StatefulWidget {
 int notificationCount = 5;
 
 class _usersearchPageState extends State<usersearchPage> {
-  String userName = "Chamaka";
-  double availableBalance = 5000.00;
+  
+  final firestoreInstance = FirebaseFirestore.instance;
+  final User? user = FirebaseAuth.instance.currentUser;
+  List<Module> remind = [];
+  bool isLoading = true;
+  @override
+  void initState() {
+    fetchModulesData();
+    super.initState();
+  }
+
+  Future<void> _refreshData() async {
+    await fetchModulesData();
+  }
 
   List<String> imagePaths = [
     'assets/images/io.png',
@@ -22,7 +54,7 @@ class _usersearchPageState extends State<usersearchPage> {
   ];
 
   List<String> itemTexts = [
-    'Google I/O 2023',
+    'hi,', // Include the userName using string interpolation
     'Google I/O 2023',
     'Google I/O 2023',
     'Google I/O 2023',
@@ -117,7 +149,7 @@ class _usersearchPageState extends State<usersearchPage> {
                                           ),
                                           const SizedBox(height: 5),
                                           Text(
-                                            'field',
+                                            '',
                                             style: GoogleFonts.inter(
                                               fontSize: 12,
                                               fontWeight: FontWeight.normal,
@@ -156,13 +188,13 @@ class _usersearchPageState extends State<usersearchPage> {
 
                                                               // Technician's Name
                                                               Text(
-                                                                'Technician Name',
+                                                                '$remind',
                                                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                                                               ),
                                                               SizedBox(height: 5),
 
                                                               // Expertise Area
-                                                              Text('Expertise Area: Your Expertise Area'),
+                                                              Text(remind[index].title),
 
                                                               // Living Area
                                                               Text('Living Area: Your Living Area'),
@@ -279,7 +311,7 @@ class _usersearchPageState extends State<usersearchPage> {
                                           ),
                                           const SizedBox(height: 5),
                                           Text(
-                                            'field',
+                                            '$remind',
                                             style: GoogleFonts.inter(
                                               fontSize: 12,
                                               fontWeight: FontWeight.normal,
@@ -287,7 +319,7 @@ class _usersearchPageState extends State<usersearchPage> {
                                             ),
                                           ),
                                           Text(
-                                            'district and province ',
+                                            remind[index].title,
                                             style: GoogleFonts.inter(
                                               fontSize: 12,
                                               fontWeight: FontWeight.normal,
@@ -389,5 +421,35 @@ class _usersearchPageState extends State<usersearchPage> {
       ),
     );
   }
+
+  Future<void> fetchModulesData() async {
+    try {
+      final technicians = await firestoreInstance
+          .collection("technicians")
+          .get();
+
+      List<Module> remindItem = technicians.docs.map((doc) {
+        return Module(
+          remindID: doc.id,
+          title: doc.get("email"),
+          note: doc.get("expertise"),
+          date: doc.get("province"),
+          time: doc.get("district"),
+          remind: doc.get("username"),
+        );
+      }).toList();
+
+
+      remind.addAll(remindItem);
+
+      // Update the widget state to reflect the changes
+      setState(() {
+        isLoading = false;
+      });
+    } catch (e) {
+      AppToastmsg.appToastMeassage('Error fetching modules data!');
+    }
+  }
 }
+
 //
